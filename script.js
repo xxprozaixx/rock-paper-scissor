@@ -1,3 +1,24 @@
+// DOM
+const rockBtn = document.getElementById("rock");
+const paperBtn = document.getElementById("paper");
+const scissorsBtn = document.getElementById("scissors");
+
+const playerCtr = document.querySelector(".player-ctr");
+const computerCtr = document.querySelector(".computer-ctr");
+const log = document.querySelector('#result-log');
+
+rockBtn.addEventListener("click", function() {
+    playRound("rock", getComputerChoice());
+});
+
+paperBtn.addEventListener("click", function() {
+    playRound("paper", getComputerChoice());
+});
+
+scissorsBtn.addEventListener("click", function() {
+    playRound("scissors", getComputerChoice());
+});
+
 // Get Computer Choice Output
 function getComputerChoice()
 {
@@ -6,90 +27,66 @@ function getComputerChoice()
     return choices[randomIndex];
 }
 
-// Get Player Choice Output
-function getPlayerChoice()
-{
-    let choice = prompt('Rock Paper or Scissors?');
-    let finalChoice = choice.toLowerCase();
-    return finalChoice;
-}
-
 // Write a function that plays a single round of Rock Paper Scissors. 
 function playRound(playerSelection, computerSelection)
 {
     if(playerSelection === 'rock' && computerSelection === 'paper')
     {
-        console.log('You Lose! Paper beats Rock');
-        return 'You Lose!';
+        log.textContent = 'You Lose! Paper beats Rock';
+        computerCtr.textContent = Number(computerCtr.textContent) + 1;
     }
     else if(playerSelection === 'rock' && computerSelection === 'scissors')
     {
-        console.log('You Win! Rock beats Scissors');
-        return 'You Win!';
+        log.textContent = 'You Win! Rock beats Scissors';
+        playerCtr.textContent = Number(playerCtr.textContent) + 1;
     }
     else if(playerSelection === 'scissors' && computerSelection === 'paper')
     {
-        console.log('You Win! Scissors beats Paper'); 
-        return 'You Win!';
+        log.textContent = 'You Win! Scissors beats Paper';
+        playerCtr.textContent = Number(playerCtr.textContent) + 1;
     }
     else if(playerSelection === 'scissors' && computerSelection === 'rock')
     {
-        console.log('You Lose! Rock beats Scissors');
-        return 'You Lose!';
+        log.textContent = 'You Lose! Rock beats Scissors';
+        computerCtr.textContent = Number(computerCtr.textContent) + 1;
     }
     else if(playerSelection === 'paper' && computerSelection === 'scissors')
     {
-        console.log('You Lose! Scissors beats Paper');
-        return 'You Lose!';
+        log.textContent = 'You Lose! Scissors beats Paper';
+        computerCtr.textContent = Number(computerCtr.textContent) + 1;
     }
     else if(playerSelection === 'paper' && computerSelection === 'rock')
     {
-        console.log('You Win! Paper beats Rock');
-        return 'You Win!';
+        log.textContent = 'You Win! Paper beats Rock';
+        playerCtr.textContent = Number(playerCtr.textContent) + 1;
     }
     else if(playerSelection === computerSelection)
     {
-        console.log("It's a draw");
+        log.textContent = "It's a draw";
     }
     else
     {
-        console.log('Enter a correct input')
+        alert('Enter a correct input');
     }
-}
 
-// Run the game
-function game() {
-    // Initialize
-    let playerScore = 0;
-    let computerScore = 0;
-    while(playerScore < 3 && computerScore < 3)
-    {
-        let playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-        console.log(`Player choose ${playerSelection}!`);
-        console.log(`Computer choose ${computerSelection}!`);
-        let roundResult = playRound(playerSelection, computerSelection);
-        if (roundResult === 'You Win!') 
+    if (Number(playerCtr.textContent) >= 5 || Number(computerCtr.textContent) >= 5) {
+        console.log("Game Over");
+        if(Number(playerCtr.textContent) >= 5)
         {
-            playerScore++;
-        } else if (roundResult === 'You Lose!') 
-        {
-            computerScore++;
+            playerCtr.textContent = 5;
+            setTimeout(() => {            
+                if (confirm("Player Won! Do you want to start over?")) {
+                    playerCtr.textContent = 0;
+                    computerCtr.textContent = 0;
+            }}, 100);
         }
-        console.log(`Player score: ${playerScore}`);
-        console.log(`Computer score: ${computerScore}`);
-    }
-    if (playerScore > computerScore)
-    {
-        console.log('Player Win!');
-    }
-    else
-    {
-        console.log('Computer Win!');
+        else
+        {
+            setTimeout(() => {  
+            if (confirm("Computer Won! Do you want to start over?")) {
+                playerCtr.textContent = 0;
+                computerCtr.textContent = 0;
+            }},100)
+        }
     }
 }
-
-game();
-
-
-
