@@ -73,10 +73,17 @@ header
 
 .rps-img
 {
-    height: 140px;
-    width: 140px;
+    height: 150px;
+    width: 150px;
+    padding: 10px;
     border: black solid 5px;
-    border-radius: 90%;
+    /* border-radius: 100%; */
+    transition: transform 0.3s, border 0.3s, background-color 0.3s;
+}
+
+.rps-img:hover
+{
+    transform: scale(1.2);
 }
 
 footer

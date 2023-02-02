@@ -70,7 +70,7 @@ function playRound(playerSelection, computerSelection)
     }
 
     if (Number(playerCtr.textContent) >= 5 || Number(computerCtr.textContent) >= 5) {
-        console.log("Game Over");
+        log.textContent = "Game Over";
         if(Number(playerCtr.textContent) >= 5)
         {
             playerCtr.textContent = 5;
@@ -78,6 +78,7 @@ function playRound(playerSelection, computerSelection)
                 if (confirm("Player Won! Do you want to start over?")) {
                     playerCtr.textContent = 0;
                     computerCtr.textContent = 0;
+                    log.textContent = '';
             }}, 100);
         }
         else
@@ -86,6 +87,7 @@ function playRound(playerSelection, computerSelection)
             if (confirm("Computer Won! Do you want to start over?")) {
                 playerCtr.textContent = 0;
                 computerCtr.textContent = 0;
+                log.textContent = '';
             }},100)
         }
     }
